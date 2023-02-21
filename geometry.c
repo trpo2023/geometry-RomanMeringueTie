@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 struct point {
     double x;
@@ -75,6 +76,8 @@ int main()
     file = fopen("input.txt", "r");
     char str[100];
     fgets(str, 99, file);
+	for (int i = 0; i < strlen(str); i++)
+		str[i] = tolower(str[i]);
     if (isObject(str))
         printf("Ошибка на элементе 0: Неправильный ввод названия объекта\n");
     else if (isArguments(str))
@@ -83,7 +86,7 @@ int main()
         printf("Ошибка на элементе %ld: Неправильный завершающий символ\n",
                strlen(str) - 1);
     else
-        printf("Данные введены корректно\n");
+        printf("%s", str);
     fclose(file);
     return 0;
 }
