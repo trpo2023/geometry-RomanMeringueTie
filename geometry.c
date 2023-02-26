@@ -1,6 +1,6 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
 struct point {
     double x;
@@ -22,6 +22,23 @@ struct circle {
 };
 typedef struct circle circle;
 
+void strtolower(char* str)
+{
+    for (int i = 0; i < strlen(str); i++)
+        str[i] = tolower(str[i]);
+}
+
+void objectToString(char* str, char* str1)
+{
+    int index = 0;
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] != '\n')
+            str1[index++] = str[i];
+        else
+            str[index++] = '\0';
+    }
+}
+
 int isArguments(char* str)
 {
     int ret = 1;
@@ -41,7 +58,7 @@ int isEnd(char* str)
 {
     int ret = 1;
     int firstBracket = 0;
-    long int endingSymbol = strlen(str) - 2;
+    long int endingSymbol = strlen(str) - 1;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == ')') {
             firstBracket = i;
@@ -70,23 +87,28 @@ int isObject(char* str)
     return ret;
 }
 
+void printErrors(char* str)
+{
+    if (isObject(str))
+        printf("Ошибка после элемента 0: Неправильный ввод названия объекта\n");
+    else if (isArguments(str))
+        printf("Ошибка после элемента 7: Неправильно введены данные объекта\n");
+    else if (isEnd(str))
+        printf("Ошибка после элемента %ld: Неправильный завершающий символ\n",
+               strlen(str) - 1);
+    else
+        printf("%s\n", str);
+}
+
 int main()
 {
     FILE* file;
     file = fopen("input.txt", "r");
-    char str[100];
-    fgets(str, 99, file);
-	for (int i = 0; i < strlen(str); i++)
-		str[i] = tolower(str[i]);
-    if (isObject(str))
-        printf("Ошибка на элементе 0: Неправильный ввод названия объекта\n");
-    else if (isArguments(str))
-        printf("Ошибка на элементе 7: Неправильно введены данные объекта\n");
-    else if (isEnd(str))
-        printf("Ошибка на элементе %ld: Неправильный завершающий символ\n",
-               strlen(str) - 1);
-    else
-        printf("%s", str);
+    char str1[100], str2[100];
+    fgets(str1, 99, file);
+    strtolower(str1);
+    objectToString(str1, str2);
+    printErrors(str2);
     fclose(file);
     return 0;
 }
