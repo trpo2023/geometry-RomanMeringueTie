@@ -35,7 +35,6 @@ int isArguments(char* str)
     for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
         if (str[i] >= 48 && str[i] <= 57 && str[i + 1] == ' ')
             count++;
-
         if (str[i] == '.' && str[i + 1] == ' ')
             count += 2;
     }
@@ -45,20 +44,28 @@ int isArguments(char* str)
         return ret;
     }
     int index = 0;
-    count = 0;
     for (int i = 0; i != strlen(str); i++) {
-        if (str[i] == ',')
+        if (str[i] == ',') {
             index = i + 1;
+            i = strlen(str) - 1;
+        }
     }
-    for (; index < strlen(str); index++) {
-        if ((str[index] > 48 && str[index] <= 57 && str[index + 1] == ' ')
-            || str[index] == 48 || (str[index] == '.' && str[index + 1] == ' '))
+    for (; str[index] != ')' && index < strlen(str); index++) {
+        if (str[index] != '.' && str[index] != ' '
+            && (str[index] < 48 && str[index] > 57)) {
+            printf("Неправильно введён радиус объекта\n");
+            return 1;
+        }
+
+        if ((str[index] >= 48 && str[index] <= 57 && str[index + 1] != '.')
+            || str[index] == ' ')
+            count += 0;
+        else
             count++;
-        if (!((str[index] > 48 && str[index] <= 57) || str[index] == '.'
-              || str[index] == ' '))
+        if (str[index] == '.' && str[index + 1] == ' ')
             count++;
     }
-    if (count != 0) {
+    if (count != 3 && count != 1) {
         printf("Неправильно введён радиус объекта\n");
         ret++;
     }
@@ -102,7 +109,7 @@ int isObject(char* str)
     return ret;
 }
 
-void printErrors(char* str)
+int printErrors(char* str, int countObj)
 {
     printf("Объект %d:\n", countObj);
     if (isObject(str))
