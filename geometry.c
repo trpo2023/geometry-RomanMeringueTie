@@ -69,7 +69,11 @@ int isEnd(char* str)
 {
     int ret = 1;
     int firstBracket = 0;
-    long int endingSymbol = strlen(str) - 1;
+    long int endingSymbol;
+    if (str[strlen(str) - 1] == '\n')
+        endingSymbol = strlen(str) - 2;
+    else
+        endingSymbol = strlen(str) - 1;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == ')') {
             firstBracket = i;
