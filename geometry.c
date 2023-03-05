@@ -33,6 +33,12 @@ int isArguments(char* str)
     int ret = 0;
     int count = 0;
     for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
+        if ((str[i] != '.' && str[i] != ' ')
+            && !(str[i] >= 48 && str[i] <= 57)) {
+            printf("Неправильно введены координаты объекта\n");
+            ret++;
+            return 1;
+        }
         if (str[i] >= 48 && str[i] <= 57 && str[i + 1] == ' ')
             count++;
         if (str[i] == '.' && str[i + 1] == ')')
@@ -54,6 +60,7 @@ int isArguments(char* str)
         if ((str[index] != '.' && str[index] != ' ')
             && !(str[index] >= 48 && str[index] <= 57)) {
             printf("Неправильно введён радиус объекта\n");
+            ret++;
             return 1;
         }
         if (str[index] >= 48 && str[index] <= 57 && str[index + 1] == ' ')
