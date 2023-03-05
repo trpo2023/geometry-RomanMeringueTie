@@ -30,15 +30,37 @@ void strtolower(char* str)
 
 int isArguments(char* str)
 {
-    int ret = 1;
-    for (int i = 7; str[i] != ')'; i++) {
-        if ((str[i] >= 48 && str[i] <= 57) || str[i] == '.' || str[i] == ','
-            || str[i] == ' ')
-            ret = 0;
-        else {
-            ret = 1;
-            break;
-        }
+    int ret = 0;
+    int count = 0;
+    for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
+        if (str[i] >= 48 && str[i] <= 57 && str[i + 1] == ' ')
+            count++;
+
+        if (str[i] == '.' && str[i + 1] == ' ')
+            count += 2;
+    }
+    if (count + 1 != 2) {
+        printf("Неправильно введены координаты объекта\n");
+        ret++;
+        return ret;
+    }
+    int index = 0;
+    count = 0;
+    for (int i = 0; i != strlen(str); i++) {
+        if (str[i] == ',')
+            index = i + 1;
+    }
+    for (; index < strlen(str); index++) {
+        if ((str[index] > 48 && str[index] <= 57 && str[index + 1] == ' ')
+            || str[index] == 48 || (str[index] == '.' && str[index + 1] == ' '))
+            count++;
+        if (!((str[index] > 48 && str[index] <= 57) || str[index] == '.'
+              || str[index] == ' '))
+            count++;
+    }
+    if (count != 0) {
+        printf("Неправильно введён радиус объекта\n");
+        ret++;
     }
     return ret;
 }
