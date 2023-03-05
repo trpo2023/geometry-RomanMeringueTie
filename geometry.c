@@ -104,15 +104,16 @@ int isObject(char* str)
 
 void printErrors(char* str)
 {
+    printf("Объект %d:\n", countObj);
     if (isObject(str))
-        printf("Ошибка после элемента 0: Неправильный ввод названия объекта\n");
+        printf("Неправильный ввод названия объекта\n");
     else if (isArguments(str))
-        printf("Ошибка после элемента 7: Неправильно введены данные объекта\n");
+        return 0;
     else if (isEnd(str))
-        printf("Ошибка после элемента %ld: Неправильный завершающий символ\n",
-               strlen(str) - 1);
+        printf("Неправильный завершающий символ\n");
     else
         printf("%s\n", str);
+    return 0;
 }
 
 int main()
