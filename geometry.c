@@ -28,17 +28,6 @@ void strtolower(char* str)
         str[i] = tolower(str[i]);
 }
 
-void objectToString(char* str, char* str1)
-{
-    int index = 0;
-    for (int i = 0; i < strlen(str); i++) {
-        if (str[i] != '\n')
-            str1[index++] = str[i];
-        else
-            str[index++] = '\0';
-    }
-}
-
 int isArguments(char* str)
 {
     int ret = 1;
