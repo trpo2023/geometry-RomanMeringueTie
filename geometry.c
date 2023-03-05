@@ -119,11 +119,13 @@ int main()
 {
     FILE* file;
     file = fopen("input.txt", "r");
-    char str1[100], str2[100];
-    fgets(str1, 99, file);
-    strtolower(str1);
-    objectToString(str1, str2);
-    printErrors(str2);
+    char str1[100];
+    int countObj = 0;
+    while (fgets(str1, 99, file)) {
+        countObj++;
+        strtolower(str1);
+        printErrors(str1, countObj);
+    }
     fclose(file);
     return 0;
 }
