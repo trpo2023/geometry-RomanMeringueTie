@@ -1,7 +1,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#define NOL 48
+
+#define ZERO 48
 #define NINE 57
 struct point {
     double x;
@@ -35,12 +36,12 @@ int isArguments(char* str)
     int count = 0;
     for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
         if ((str[i] != '.' && str[i] != ' ')
-            && !(str[i] >= NOL && str[i] <= NINE)) {
+            && !(str[i] >= ZERO && str[i] <= NINE)) {
             printf("Неправильно введены координаты объекта\n");
             ret++;
             return 1;
         }
-        if (str[i] >= NOL && str[i] <= NINE && str[i + 1] == ' ')
+        if (str[i] >= ZERO && str[i] <= NINE && str[i + 1] == ' ')
             count++;
         if (str[i] == '.' && str[i + 1] == ')')
             count += 2;
@@ -59,12 +60,12 @@ int isArguments(char* str)
     }
     for (; str[index] != ')' && index < strlen(str); index++) {
         if ((str[index] != '.' && str[index] != ' ')
-            && !(str[index] >= NOL && str[index] <= NINE)) {
+            && !(str[index] >= ZERO && str[index] <= NINE)) {
             printf("Неправильно введён радиус объекта\n");
             ret++;
             return 1;
         }
-        if (str[index] >= NOL && str[index] <= NINE && str[index + 1] == ' ')
+        if (str[index] >= ZERO && str[index] <= NINE && str[index + 1] == ' ')
             count++;
         if (str[index] == '.' && str[index + 1] == ' ')
             count += 2;
