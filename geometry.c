@@ -1,7 +1,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-
+#define NOL 48
+#define NINE 57
 struct point {
     double x;
     double y;
@@ -22,7 +23,7 @@ struct circle {
 };
 typedef struct circle circle;
 
-void strtolower(char* str)
+void strToLower(char* str)
 {
     for (int i = 0; i < strlen(str); i++)
         str[i] = tolower(str[i]);
@@ -34,12 +35,12 @@ int isArguments(char* str)
     int count = 0;
     for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
         if ((str[i] != '.' && str[i] != ' ')
-            && !(str[i] >= 48 && str[i] <= 57)) {
+            && !(str[i] >= NOL && str[i] <= NINE)) {
             printf("Неправильно введены координаты объекта\n");
             ret++;
             return 1;
         }
-        if (str[i] >= 48 && str[i] <= 57 && str[i + 1] == ' ')
+        if (str[i] >= NOL && str[i] <= NINE && str[i + 1] == ' ')
             count++;
         if (str[i] == '.' && str[i + 1] == ')')
             count += 2;
@@ -58,12 +59,12 @@ int isArguments(char* str)
     }
     for (; str[index] != ')' && index < strlen(str); index++) {
         if ((str[index] != '.' && str[index] != ' ')
-            && !(str[index] >= 48 && str[index] <= 57)) {
+            && !(str[index] >= NOL && str[index] <= NINE)) {
             printf("Неправильно введён радиус объекта\n");
             ret++;
             return 1;
         }
-        if (str[index] >= 48 && str[index] <= 57 && str[index + 1] == ' ')
+        if (str[index] >= NOL && str[index] <= NINE && str[index + 1] == ' ')
             count++;
         if (str[index] == '.' && str[index + 1] == ' ')
             count += 2;
@@ -75,7 +76,7 @@ int isArguments(char* str)
     return ret;
 }
 
-int isEnd(char* str)
+int isLast(char* str)
 {
     int ret = 1;
     int firstBracket = 0;
@@ -115,14 +116,13 @@ int isObject(char* str)
 int printErrors(char* str, int countObj)
 {
     printf("Объект %d:\n", countObj);
-    if (isObject(str))
+    if (isObject(str)) {
         printf("Неправильный ввод названия объекта\n");
-    else if (isArguments(str))
+    } else if (isArguments(str)) {
         return 0;
-    else if (isEnd(str))
+    } else if (isLast(str)) {
         printf("Неправильный завершающий символ\n");
-    else
-        printf("%s\n", str);
+    }
     return 0;
 }
 
@@ -134,8 +134,9 @@ int main()
     int countObj = 0;
     while (fgets(str1, 99, file)) {
         countObj++;
-        strtolower(str1);
+        strToLower(str1);
         printErrors(str1, countObj);
+        printf("%s\n", str1);
     }
     fclose(file);
     return 0;
