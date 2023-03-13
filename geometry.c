@@ -32,24 +32,23 @@ void strToLower(char* str)
 
 int isArguments(char* str)
 {
-    int ret = 0;
-    int count = 0;
+    int countArgs = 0;
     for (int i = 7; str[i] != ',' && i < strlen(str); i++) {
         if ((str[i] != '.' && str[i] != ' ')
             && !(str[i] >= ZERO && str[i] <= NINE)) {
             printf("Неправильно введены координаты объекта\n");
-            ret++;
             return 1;
         }
         if (str[i] >= ZERO && str[i] <= NINE && str[i + 1] == ' ')
-            count++;
-        if (str[i] == '.' && str[i + 1] == ')')
-            count += 2;
+            countArgs++;
+        if (str[i] == '.' && (str[i + 1] == ' ' || str[i + 1] == '.')) {
+            printf("Неправильно введены координаты объекта\n");
+            return 1;
+        }
     }
-    if (count + 1 != 2) {
+    if (countArgs + 1 != 2) {
         printf("Неправильно введены координаты объекта\n");
-        ret++;
-        return ret;
+        return 1;
     }
     int index = 0;
     for (int i = 0; i != strlen(str); i++) {
@@ -62,22 +61,24 @@ int isArguments(char* str)
         if ((str[index] != '.' && str[index] != ' ')
             && !(str[index] >= ZERO && str[index] <= NINE)) {
             printf("Неправильно введён радиус объекта\n");
-            ret++;
             return 1;
         }
         if (str[index] >= ZERO && str[index] <= NINE && str[index + 1] == ' ')
-            count++;
-        if (str[index] == '.' && str[index + 1] == ' ')
-            count += 2;
+            countArgs++;
+        if (str[index] == '.'
+            && (str[index + 1] == ' ' || str[index + 1] == '.')) {
+            printf("Неправильно введены координаты объекта\n");
+            return 1;
+        }
     }
-    if (count != 1) {
+    if (countArgs != 1) {
         printf("Неправильно введён радиус объекта\n");
-        ret++;
+        return 0;
     }
-    return ret;
+    return 0;
 }
 
-int isLast(char* str)
+int isLastBracket(char* str)
 {
     int ret = 1;
     int firstBracket = 0;
@@ -118,10 +119,10 @@ int printErrors(char* str, int countObj)
 {
     printf("Объект %d:\n", countObj);
     if (isObject(str)) {
-        printf("Неправильный ввод названия объекта\n");
+        printf("Неправильно введено название объекта\n");
     } else if (isArguments(str)) {
         return 0;
-    } else if (isLast(str)) {
+    } else if (isLastBracket(str)) {
         printf("Неправильный завершающий символ\n");
     }
     return 0;
