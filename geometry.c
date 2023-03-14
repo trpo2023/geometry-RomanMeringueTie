@@ -83,7 +83,7 @@ int isLastBracket(char* str)
 {
     int ret = 1;
     int firstBracket = 0;
-    long int endingSymbol;
+    size_t endingSymbol;
     if (str[strlen(str) - 1] == '\n')
         endingSymbol = strlen(str) - 2;
     else
