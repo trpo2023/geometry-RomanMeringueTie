@@ -133,6 +133,10 @@ int main()
 {
     FILE* file;
     file = fopen("input.txt", "r");
+    if (!file) {
+        printf("Не найден файл\n");
+        return -1;
+    }
     char str1[100];
     int countObj = 0;
     while (fgets(str1, 99, file)) {
