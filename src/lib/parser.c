@@ -1,39 +1,16 @@
 #include <lib/parser.h>
-#include <lib/input_checker.h>
+#include <lib/lexer.h>
+#include <math.h>
+#define PI 3.14
 
-int getCenter(char *str, circle *circle)
+double perimeter(circle *circle)
 {
-    char *number = malloc(10);
-    int bracket = 0;
-    for (int i = 0;; i++)
-    {
-        if (str[i] == '(')
-        {
-            bracket = i;
-            break;
-        }
-    }
-    int index = 0;
-    for (int i = bracket + 1; str[i] != ','; i++)
-        number[index++] = str[i];
-    if (sscanf(number, "%lf %lf", &(circle->center.x), &(circle->center.y)) == 2)
-        return 0;
-    else
-        return -1;
+    double perimetr = 2 * PI * circle->radius;
+    return perimetr;
 }
 
-int getRadius(char *str, circle *circle)
+double area(circle *circle)
 {
-    char *number = malloc(10);
-    int comma = 0;
-    for (int i = 0; str[i] != ','; i++)
-        comma = i + 2;
-    int index = 0;
-    for (int i = comma; str[i] != ')'; i++)
-        number[index++] = str[i];
-    if (sscanf(number, "%lf", &(circle->radius)) == 1)
-        return 0;
-    else
-        return -1;
-    return 0;
+    double area = PI * pow(circle->radius, 2);
+    return area;
 }
