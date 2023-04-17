@@ -1,5 +1,6 @@
 #include <lib/parser.h>
 #include <lib/input_checker.h>
+#include <stdlib.h>
 
 int getCenter(char *str, circle *circle)
 {
