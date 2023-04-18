@@ -63,7 +63,7 @@ int isArguments(char* str)
     }
     if (countArgs != 0) {
         printf("Неправильно введён радиус объекта\n");
-        return 0;
+        return -1;
     }
     return 0;
 }

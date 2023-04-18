@@ -1,1 +1,1 @@
-obj/lexer.o: src/lib/lexer.c src/lib/parser.h src/lib/input_checker.h
+obj/lexer.o: src/lib/lexer.c src/lib/input_checker.h src/lib/parser.h

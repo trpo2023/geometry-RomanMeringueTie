@@ -1,8 +1,10 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
 #include <lib/input_checker.h>
 #include <lib/lexer.h>
 #include <lib/parser.h>
-#include <stdio.h>
-#include <string.h>
 
 #define ZERO 48
 #define NINE 57

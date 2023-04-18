@@ -22,5 +22,3 @@ obj/parser.o: src/lib/parser.c
 clean:
 	rm obj/*.*
 	rm bin/*.out
-	rm src/app/*.d
-	rm src/app/*.o
