@@ -22,3 +22,8 @@ obj/parser.o: src/lib/parser.c
 clean:
 	rm obj/*.*
 	rm bin/*.out
+	test: test/main.c
+test: test/main.c
+
+test/main.c: obj/test/*.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
