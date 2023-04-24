@@ -1,4 +1,6 @@
+#include <ctest.h>
 #include <lib/input_checker.h>
+#include <lib/lexer.h>
 #include <lib/parser.h>
 
 #define ZERO 48
@@ -107,7 +109,6 @@ int isObject(char* str)
 
 int printErrors(char* str, int countObj)
 {
-    printf("Объект %d:\n", countObj);
     if (isObject(str)) {
         printf("Неправильно введено название объекта\n");
         return -1;

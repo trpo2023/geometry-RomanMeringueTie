@@ -19,20 +19,25 @@ int main()
     }
     char str1[100];
     int countObj = 0;
-    circle circle;
+    circle circle_obj;
+    circle* figures = calloc(100, sizeof(circle));
     while (fgets(str1, 99, file)) {
-        countObj++;
         strToLower(str1);
-        if (printErrors(str1, countObj) != 0)
+        if (printErrors(str1, countObj) == 0) {
+            countObj++;
+            getCenter(str1, &circle_obj);
+            getRadius(str1, &circle_obj);
+            circle_obj.perimeter = perimeter(&circle_obj);
+            circle_obj.area = area(&circle_obj);
+            figures[countObj - 1] = circle_obj;
+        } else {
             printf("%s\n", str1);
-        else {
-            printf("%s\n", str1);
-            getCenter(str1, &circle);
-            getRadius(str1, &circle);
-            printf("perimetr = %.3lf\n", perimeter(&circle));
-            printf("area = %.3lf\n", area(&circle));
         }
     }
+    for (int i = 0; i < countObj; i++) {
+        intersects(figures, i, countObj);
+    }
     fclose(file);
+    free(figures);
     return 0;
 }

@@ -13,6 +13,8 @@ typedef struct point point;
 struct circle {
     point center;
     double radius;
+    double perimeter;
+    double area;
 };
 typedef struct circle circle;
 

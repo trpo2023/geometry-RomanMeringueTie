@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include <lib/input_checker.h>
+#include <lib/lexer.h>
 #include <lib/parser.h>
 
 int getCenter(char* str, circle* circle)
@@ -17,10 +18,13 @@ int getCenter(char* str, circle* circle)
     for (int i = bracket + 1; str[i] != ','; i++)
         number[index++] = str[i];
     if (sscanf(number, "%lf %lf", &(circle->center.x), &(circle->center.y))
-        == 2)
+        == 2) {
+        free(number);
         return 0;
-    else
+    } else {
+        free(number);
         return -1;
+    }
 }
 
 int getRadius(char* str, circle* circle)
@@ -32,9 +36,11 @@ int getRadius(char* str, circle* circle)
     int index = 0;
     for (int i = comma; str[i] != ')'; i++)
         number[index++] = str[i];
-    if (sscanf(number, "%lf", &(circle->radius)) == 1)
+    if (sscanf(number, "%lf", &(circle->radius)) == 1) {
+        free(number);
         return 0;
-    else
+    } else {
+        free(number);
         return -1;
-    return 0;
+    }
 }
