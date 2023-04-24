@@ -1,5 +1,6 @@
 #include <math.h>
 
+#include <lib/input_checker.h>
 #include <lib/lexer.h>
 #include <lib/parser.h>
 #define _USE_MATH_DEFINES

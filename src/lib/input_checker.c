@@ -1,4 +1,6 @@
+#include <ctest.h>
 #include <lib/input_checker.h>
+#include <lib/lexer.h>
 #include <lib/parser.h>
 
 #define ZERO 48
@@ -74,9 +76,9 @@ int isLastBracket(char* str)
     int firstBracket = 0;
     size_t endingSymbol;
     if (str[strlen(str) - 1] == '\n')
-        endingSymbol = strlen(str) - 3;
+        endingSymbol = strlen(str) - 2;
     else
-        endingSymbol = strlen(str) - 3;
+        endingSymbol = strlen(str) - 1;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == ')') {
             firstBracket = i;
