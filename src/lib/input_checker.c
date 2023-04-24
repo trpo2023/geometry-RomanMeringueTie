@@ -76,9 +76,9 @@ int isLastBracket(char* str)
     int firstBracket = 0;
     size_t endingSymbol;
     if (str[strlen(str) - 1] == '\n')
-        endingSymbol = strlen(str) - 2;
+        endingSymbol = strlen(str) - 3;
     else
-        endingSymbol = strlen(str) - 1;
+        endingSymbol = strlen(str) - 3;
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == ')') {
             firstBracket = i;
@@ -109,7 +109,6 @@ int isObject(char* str)
 
 int printErrors(char* str, int countObj)
 {
-    printf("Объект %d:\n", countObj);
     if (isObject(str)) {
         printf("Неправильно введено название объекта\n");
         return -1;

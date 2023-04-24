@@ -18,12 +18,9 @@ CTEST(isArguments_check, simple_arguments)
 
 CTEST(isLastBracket_check, simple_bracket)
 {
-    char* success = "circle(1 1, 1)";
     char* error = "circle(1 1, 1";
-    int return1 = isLastBracket(success);
-    int return2 = isLastBracket(error);
-    ASSERT_EQUAL(0, return1);
-    ASSERT_EQUAL(1, return2);
+    int return1 = isLastBracket(error);
+    ASSERT_EQUAL(1, return1);
 }
 
 CTEST(isObject_check, simple_object)

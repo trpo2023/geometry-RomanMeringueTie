@@ -19,17 +19,7 @@ obj/lib/lexer.o: src/lib/lexer.c
 obj/lib/parser.o: src/lib/parser.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
 
-clean:
-	rm obj/test/*.*
-	rm obj/lib/*.*
-	rm bin/*.out
-
-.PHONY: test
-
-test: testapp
-	./testapp
-
-testapp: obj/test/input_checker_test.o obj/test/lexer_test.o obj/test/parser_test.o obj/test/main.o obj/lib/lib.a
+bin/testapp.out: obj/test/input_checker_test.o obj/test/lexer_test.o obj/test/parser_test.o obj/test/main.o obj/lib/lib.a
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 obj/test/input_checker_test.o: test/input_checker_test.c
@@ -43,3 +33,15 @@ obj/test/parser_test.o: test/parser_test.c
 
 obj/test/main.o: test/main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
+
+.PHONY: test
+
+test: bin/testapp.out
+	./bin/testapp.out
+
+clean:
+	# rm obj/test/*.*
+	rm obj/lib/*.*
+	rm bin/*.out
+	rm bin/*.d
+	

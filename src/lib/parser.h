@@ -4,3 +4,5 @@
 double perimeter(circle* circle);
 
 double area(circle* circle);
+
+int intersects(circle* figures, int index, int length);

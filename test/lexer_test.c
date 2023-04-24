@@ -13,7 +13,7 @@ CTEST(getCenter_check, simple_center)
     free(circle);
 }
 
-CTEST(getRadius_check, radius_center)
+CTEST(getRadius_check, simple_radius)
 {
     char* str = "circle(1 1, 1)";
     circle* circle = calloc(1, sizeof(circle));
