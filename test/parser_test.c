@@ -1,9 +1,10 @@
 #include <ctest.h>
+#include <math.h>
+#include <stdlib.h>
+
 #include <lib/input_checker.h>
-#include <lib/lexer.h>
 #include <lib/parser.h>
 
-#include <math.h>
 #define _USE_MATH_DEFINES
 
 CTEST(perimeter_check, simple_perimeter)

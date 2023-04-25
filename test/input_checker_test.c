@@ -1,7 +1,6 @@
 #include <ctest.h>
+
 #include <lib/input_checker.h>
-#include <lib/lexer.h>
-#include <lib/parser.h>
 
 CTEST(isArguments_check, simple_arguments)
 {

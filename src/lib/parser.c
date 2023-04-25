@@ -1,8 +1,10 @@
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include <lib/input_checker.h>
-#include <lib/lexer.h>
 #include <lib/parser.h>
+
 #define _USE_MATH_DEFINES
 
 double perimeter(circle* circle)

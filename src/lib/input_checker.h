@@ -1,9 +1,5 @@
 #pragma once
 
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-
 struct point {
     double x;
     double y;

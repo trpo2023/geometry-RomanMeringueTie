@@ -1,4 +1,7 @@
-#include <ctest.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
 #include <lib/input_checker.h>
 #include <lib/lexer.h>
 #include <lib/parser.h>

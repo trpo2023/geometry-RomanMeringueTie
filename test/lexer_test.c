@@ -1,7 +1,8 @@
 #include <ctest.h>
+#include <stdlib.h>
+
 #include <lib/input_checker.h>
 #include <lib/lexer.h>
-#include <lib/parser.h>
 
 CTEST(getCenter_check, simple_center)
 {
